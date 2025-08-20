@@ -1,0 +1,402 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>无政府共产主义同志社 · iOS皮肤</title>
+<style>
+/* ===================== iOS 视觉基因 ===================== */
+:root{
+  --bg:#F2F2F7;            /* systemGroupedBackground */
+  --card:#FFFFFF;           /* systemBackground */
+  --label:#000;             /* label */
+  --secondary:#6C6C70;      /* secondaryLabel */
+  --tertiary:#8E8E93;       /* tertiaryLabel */
+  --hair:#D9D9D9;           /* separator */
+  --tint:#007AFF;           /* 系统蓝 */
+  --fill:rgba(120,120,128,.12); /* fill */
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:var(--bg);color:var(--label);font:14px/1.6 -apple-system,BlinkMacSystemFont,"SF Pro Text",system-ui,Segoe UI,Roboto,Helvetica,Arial,"Noto Sans",sans-serif}
+img,video{max-width:100%;display:block}
+button{cursor:pointer}
+
+/* 顶部导航：位置/结构完全不变，仅换肤 */
+.header{position:sticky;top:0;z-index:40;backdrop-filter:saturate(1.2) blur(20px);-webkit-backdrop-filter:saturate(1.2) blur(20px);background:rgba(250,250,252,.78);border-bottom:1px solid var(--hair)}
+.nav{max-width:1100px;margin:auto;padding:12px 14px;display:flex;gap:12px;align-items:center}
+.brand{display:flex;gap:10px;align-items:center}
+.brand .badge{width:28px;height:28px;border-radius:9px;display:grid;place-items:center;background:#111;color:#fff;font-weight:900}
+.brand .title{font-weight:900;letter-spacing:.02em}
+.tabs{display:flex;gap:6px;margin-left:8px}
+.tab{border:1px solid var(--hair);background:var(--card);border-radius:12px;padding:6px 10px;font-size:13px}
+.tab.active{background:var(--label);color:#fff;border-color:#000}
+
+.container{max-width:1100px;margin:auto;padding:16px}
+.hidden{display:none!important}
+
+/* 卡片（iOS） */
+.card{background:var(--card);border:1px solid var(--hair);border-radius:20px;box-shadow:0 .6px .8px rgba(0,0,0,.12),0 1.5px 2px rgba(0,0,0,.08),0 3.6px 4.8px rgba(0,0,0,.06);position:relative}
+.section{margin-bottom:20px}
+.h1{font-size:28px;font-weight:900;margin:8px 0 12px}
+.h2{font-size:18px;font-weight:800;margin:0 0 8px}
+.text-muted{color:var(--secondary)}
+
+/* 主页英雄区：保持原位置/结构，只换肤 */
+.hero{padding:24px;text-align:center;background:#E6F4FF;border:1px solid var(--hair);border-radius:20px}
+.hero .big{font-size:34px;font-weight:1000;letter-spacing:.01em}
+.hero .sub{color:var(--secondary);margin-top:6px}
+
+/* 我们的活动卡片：蛋黄淡黄底（保留你要求的风格，但更 iOS） */
+.activity-card{background:#FFF3BF;border:1px solid var(--hair);border-radius:20px}
+
+/* 小圆点徽记（不变：黄=精选，绿=优秀，蓝=置顶） */
+.badges{display:flex;gap:6px;align-items:center;margin-bottom:6px}
+.dot{width:10px;height:10px;border-radius:10px;border:1px solid #0002}
+.dot.yellow{background:#F1B300}
+.dot.green{background:#0EA35A}
+.dot.blue{background:#1D74F5}
+
+/* 置顶公告栅格（位置/数量不变） */
+.pinned-strip{display:grid;grid-template-columns:1fr;gap:10px}
+@media(min-width:720px){.pinned-strip{grid-template-columns:repeat(2,1fr)}}
+.pill{display:flex;align-items:center;gap:8px;padding:10px;border:1px solid var(--hair);background:var(--card);border-radius:16px}
+.pill .name{font-weight:700}
+
+/* 首页精选/优秀网格：小屏2列/大屏4列（与之前一致语义） */
+.curated-grid{display:grid;grid-template-columns:1fr;gap:12px}
+@media(min-width:720px){.curated-grid{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1200px){.curated-grid{grid-template-columns:repeat(4,1fr)}}
+
+/* 文章卡片：封面小矩形 + 文本，逻辑/位置不变 */
+.post-card{display:flex;flex-direction:column;animation:fadeUp .45s ease-out both}
+.thumb{aspect-ratio:16/9;overflow:hidden;border-bottom:1px solid var(--hair)}
+.thumb img{width:100%;height:100%;object-fit:cover;transition:transform .45s ease}
+.post-card:hover .thumb img{transform:scale(1.03)}
+.color-thumb{width:100%;height:100%;}
+.body{padding:12px}
+.title{font-weight:800;font-size:15px}
+.meta{font-size:12px;color:var(--secondary)}
+
+/* 板块页瀑布流（保持不变） */
+.masonry{column-count:1;column-gap:12px}
+@media(min-width:720px){.masonry{column-count:2}}
+@media(min-width:1024px){.masonry{column-count:3}}
+.masonry .mitem{break-inside:avoid;margin:0 0 12px}
+
+/* 搜索框（位置/功能不变，换肤） */
+.search{display:flex;gap:8px;align-items:center}
+.search input{flex:1;padding:10px 12px;border:1px solid var(--hair);border-radius:12px;background:var(--card)}
+.search .btn{border:1px solid var(--hair);border-radius:12px;background:var(--card);padding:8px 12px}
+
+/* 页脚：只换文案与视觉，不动位置 */
+.footer{border-top:1px solid var(--hair);padding:16px;color:var(--tertiary)}
+
+/* 通用按钮 */
+.btn{border:1px solid var(--hair);background:var(--card);border-radius:12px;padding:8px 12px}
+.btn.primary{background:var(--tint);color:#fff;border-color:#0a84ff}
+
+/* 细腻动效 */
+@keyframes fadeUp{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+/* 提示/空状态 */
+.note{padding:8px 10px;border:1px dashed var(--hair);border-radius:12px;background:var(--card);color:var(--secondary)}
+.hidden-when-empty:empty{display:none}
+</style>
+</head>
+<body>
+<header class="header">
+  <div class="nav">
+    <div class="brand">
+      <div class="badge">Ⓐ</div>
+      <div class="title">无政府共产主义同志社</div>
+    </div>
+    <!-- 保持原始导航的顺序/位置/文案不变 -->
+    <div class="tabs" id="tabs">
+      <button data-href="#home" class="tab active">首页</button>
+      <button data-href="#board" class="tab">板块</button>
+      <button data-href="#official" class="tab">我们的内容</button>
+      <button data-href="#submit" class="tab">如何投稿</button>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+  <!-- ========= 首页（结构不变） ========= -->
+  <section id="page-home" class="section">
+    <div class="hero">
+      <div class="big">（站点大标题占位）</div>
+      <div class="sub">自由不是混乱，而是自我管理。这里是一块轻便的、去中心的投稿地。</div>
+    </div>
+
+    <div class="section">
+      <div class="h2">我们的活动</div>
+      <div class="card activity-card" style="padding:16px">
+        <div style="font-weight:900;font-size:22px">暂无活动</div>
+        <div class="text-muted">欢迎投稿</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="h2">置顶公告</div>
+      <div id="home-pinned" class="pinned-strip"></div>
+      <div id="home-pinned-empty" class="note">暂无置顶公告。请在 <code>b/</code> 中文章文件夹名加 <code>_P</code> 置顶。</div>
+    </div>
+
+    <div class="section">
+      <div class="h2">精选与优秀</div>
+      <div id="home-curated" class="curated-grid"></div>
+    </div>
+  </section>
+
+  <!-- ========= 板块（搜索 + 瀑布流） ========= -->
+  <section id="page-board" class="section hidden">
+    <div class="h1">板块 / 搜索</div>
+    <div class="search" style="margin:8px 0 12px">
+      <input id="q" placeholder="搜索：标题 + 正文（home.txt）" />
+      <button id="btnSearch" class="btn">搜索</button>
+      <button id="btnClear" class="btn">清空</button>
+    </div>
+    <div id="searchInfo" class="text-muted hidden-when-empty" style="margin:6px 0"></div>
+    <div id="boardList" class="masonry"></div>
+  </section>
+
+  <!-- ========= 我们的内容（官方） ========= -->
+  <section id="page-official" class="section hidden">
+    <div class="h1">我们的内容 / 公告</div>
+    <div id="officialTop" class="curated-grid" style="margin-bottom:12px"></div>
+    <div id="officialList" class="curated-grid"></div>
+  </section>
+
+  <!-- ========= 如何投稿（仅邮箱与规则 + 彩蛋，位置不变） ========= -->
+  <section id="page-submit" class="section hidden">
+    <div class="h1">如何投稿</div>
+    <div class="card" style="padding:14px">
+      <div class="h2">邮箱与规则</div>
+      <ul>
+        <li>主用邮箱：<b id="mailMain" style="cursor:pointer">p23333333666999@163.com</b></li>
+        <li>备用邮箱：<b>teshuzy@gmail.com</b></li>
+        <li>只收 <code>jpg/png/webp</code> 图片（≤ 9 张），视频 <code>mp4</code>（≤ 20MB/个），音频 <code>mp3</code>（≤ 2 个）。</li>
+        <li>正文放在 <code>home.txt</code>，作者与日期放在 <code>main.txt</code> 或 <code>命.txt</code>，文件夹名即标题。</li>
+      </ul>
+    </div>
+  </section>
+</main>
+
+<!-- ========= 文章详情弹层（不改交互，仅换肤） ========= -->
+<div id="modal" class="hidden" style="position:fixed;inset:0;background:rgba(0,0,0,.4);display:grid;place-items:center;padding:16px;z-index:60">
+  <div class="card" style="max-width:900px;max-height:90vh;overflow:auto;width:100%">
+    <div style="display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--hair);padding:10px 14px">
+      <div id="mTitle" style="font-weight:900"></div>
+      <button id="mClose" class="btn">关闭</button>
+    </div>
+    <div style="padding:12px">
+      <div class="badges" id="mBadges"></div>
+      <div id="mMeta" class="meta" style="margin-bottom:8px"></div>
+      <article id="mBody" style="white-space:pre-wrap"></article>
+      <div id="mMedia" style="margin-top:12px;display:grid;grid-template-columns:1fr;gap:10px"></div>
+    </div>
+  </div>
+</div>
+
+<footer class="footer container">© 2025 无政府主义同志社 · 独立思考，明辨是非</footer>
+
+<script>
+/* ===================== 逻辑保持不变 ===================== */
+const state = {
+  A: { list: [], byKey: {} }, // 用户内容（允许 _SS/_S）
+  B: { list: [], byKey: {} }, // 官方内容（允许 _P）
+  capacity: 8,                // 首页容量：6 精选 + 2 优秀；不足补位
+};
+
+const extsImg = ["jpg","jpeg","png","webp"]; // 图片最多 9 张
+const extsVid = ["mp4"]; // 单个 ≤20MB（线上无法测体积，仅规范；本地选择模式已移除）
+const extsAud = ["mp3"]; // 音频最多 2 个
+
+/* 路由（不变） */
+const pages = ["home","board","official","submit"];
+function switchTo(hash){
+  const h = (hash||location.hash||"#home").replace('#','');
+  pages.forEach(p=>{
+    document.getElementById('page-'+p).classList.toggle('hidden', p!==h);
+    [...document.querySelectorAll('#tabs .tab')].forEach(btn=>{
+      if(btn.dataset && btn.dataset.href){ btn.classList.toggle('active', btn.dataset.href === '#'+h); }
+    });
+  });
+}
+window.addEventListener('hashchange', ()=>switchTo());
+for(const b of document.querySelectorAll('#tabs .tab')){ b.addEventListener('click',()=>{ location.hash = b.dataset.href; }); }
+
+/* 工具（不变） */
+function parseFlagsFromFolder(name){
+  let raw = name; let title = name; let flags = { ss:false, s:false, p:false };
+  if(/_SS/i.test(title)) { flags.ss = true; title = title.replace(/_SS/ig,''); }
+  if(/_S(?!S)/i.test(title)) { flags.s = true; title = title.replace(/_S(?!S)/ig,''); }
+  if(/_P/i.test(title)) { flags.p = true; title = title.replace(/_P/ig,''); }
+  return { title:title.trim(), flags, raw };
+}
+function fmtDate(d){ if(!d) return ''; try {const dt = new Date(d); return isNaN(dt)?'':dt.toISOString().slice(0,10);} catch{ return ''; } }
+function guessDate(str){
+  if(!str) return 0;
+  const m = String(str).match(/(\d{4}).{0,2}(\d{1,2}).{0,2}(\d{1,2})/);
+  if(m){ const y=+m[1], mo=+m[2], da=+m[3]; const dt = new Date(y,mo-1,da); return dt.getTime(); }
+  const m2 = String(str).match(/(\d{4}-\d{1,2}-\d{1,2})/);
+  if(m2){ return new Date(m2[1]).getTime(); }
+  return 0;
+}
+function el(tag, attrs={}, children=[]) {
+  const e=document.createElement(tag);
+  Object.entries(attrs).forEach(([k,v])=>{ if(k==='_html') e.innerHTML=v; else if(k==='class') e.className=v; else e.setAttribute(k,v); });
+  (Array.isArray(children)?children:[children]).filter(Boolean).forEach(c=> e.appendChild(typeof c==='string'?document.createTextNode(c):c));
+  return e;
+}
+
+async function loadManifestTxt(name){
+  try{ const res = await fetch(name); if(!res.ok) throw 0; const t = await res.text(); return t; }catch(e){ return null; }
+}
+async function tryLoadText(path){ try{ const r = await fetch(path); if(!r.ok) throw 0; return await r.text(); }catch{ return ''; } }
+async function tryHead(path){ try{ const r = await fetch(path, {method:'HEAD'}); return r.ok; }catch{ return false; } }
+async function tryExists(path){ if(await tryHead(path)) return true; try{ const r= await fetch(path); return r.ok; }catch{ return false; } }
+async function probeMedia(base){
+  const imgs=[], vids=[], auds=[];
+  for(let i=1;i<=9;i++){
+    for(const ext of extsImg){
+      const p = `${base}/${i}.${ext}`; if(await tryExists(p)){ imgs.push(p); break; }
+      const p0 = `${base}/${String(i).padStart(2,'0')}.${ext}`; if(await tryExists(p0)){ imgs.push(p0); break; }
+    }
+  }
+  for(let i=1;i<=2;i++){ const p=`${base}/${i}.mp4`; if(await tryExists(p)) vids.push(p); }
+  for(let i=1;i<=2;i++){ const p=`${base}/${i}.mp3`; if(await tryExists(p)) auds.push(p); }
+  return {imgs,vids,auds};
+}
+async function loadArticleFromServer(root, folder){
+  const {title, flags, raw} = parseFlagsFromFolder(folder);
+  const base = `${root}/${raw}`;
+  const home = await tryLoadText(`${base}/home.txt`);
+  const mainTxt = await tryLoadText(`${base}/main.txt`) || await tryLoadText(`${base}/命.txt`);
+  const dateMs = guessDate(mainTxt);
+  const media = await probeMedia(base);
+  return { key: raw, title, flags, root, base, home, mainTxt, dateMs, media, sizeChecked:false };
+}
+
+/* 无图封面占位（保持逻辑，只换成柔和渐变） */
+function gradForKey(key){
+  let h=0; for(let i=0;i<String(key).length;i++) h=(h*31+String(key).charCodeAt(i))>>>0;
+  const hues=[210,220,230,200,190,180,160,150]; const hue=hues[h%hues.length];
+  return `linear-gradient(135deg, hsl(${hue} 80% 96%), hsl(${hue} 80% 90%))`;
+}
+
+/* 渲染（不改变结构/排序/容量/权重） */
+function badgeDots(a, where){
+  const box = el('div',{class:'badges'});
+  if(a.flags.p) box.appendChild(el('span',{class:'dot blue'}));
+  if(a.flags.ss) box.appendChild(el('span',{class:'dot yellow'}));
+  if(a.flags.s) box.appendChild(el('span',{class:'dot green'}));
+  if(where) { where.innerHTML=''; where.appendChild(box); }
+  return box;
+}
+function postCard(a){
+  const card = el('div',{class:'card mitem post-card'});
+  const th = el('div',{class:'thumb'});
+  if(a.media.imgs && a.media.imgs[0]){
+    th.appendChild(el('img',{src:a.media.imgs[0],alt:a.title}));
+  } else {
+    const ph = el('div',{class:'color-thumb',style:`display:grid;place-items:center;background:${gradForKey(a.key)}`}, el('div',{style:'opacity:.55;font-weight:800'},'无封面'));
+    th.appendChild(ph);
+  }
+  const bd = el('div',{class:'body'});
+  const badges = badgeDots(a);
+  const t = el('div',{class:'title'}, a.title);
+  const m = el('div',{class:'meta'}, (a.mainTxt? a.mainTxt.split(/\n/)[0] : ''));
+  const btn = el('button',{class:'btn',style:'margin-top:8px'},'打开'); btn.addEventListener('click',()=>openModal(a));
+  bd.appendChild(badges); bd.appendChild(t); bd.appendChild(m); bd.appendChild(btn);
+  card.appendChild(th); card.appendChild(bd);
+  return card;
+}
+
+function renderHome(){
+  // 置顶公告：仅 B/_P，最多 2 条，时间倒序
+  const pinned = state.B.list.filter(x=>x.flags.p).sort((a,b)=> (b.dateMs||0)-(a.dateMs||0)).slice(0,2);
+  const pinBox = document.getElementById('home-pinned'); pinBox.innerHTML='';
+  if(pinned.length){
+    document.getElementById('home-pinned-empty').style.display='none';
+    pinned.forEach(a=>{
+      const pill = el('div',{class:'pill'});
+      pill.appendChild(el('span',{class:'dot blue'}));
+      pill.appendChild(el('div',{class:'name'},a.title));
+      const open = el('button',{class:'btn',style:'margin-left:auto'},'查看'); open.addEventListener('click',()=>openModal(a));
+      pill.appendChild(open); pinBox.appendChild(pill);
+    });
+  } else { document.getElementById('home-pinned-empty').style.display='block'; }
+
+  // 精选/优秀：固定 6 + 2；不足补位；A 源
+  const ss = state.A.list.filter(a=>a.flags.ss).sort((a,b)=> (b.dateMs||0)-(a.dateMs||0));
+  const s  = state.A.list.filter(a=>!a.flags.ss && a.flags.s).sort((a,b)=> (b.dateMs||0)-(a.dateMs||0));
+  const cap = state.capacity; const needSS = Math.min(6, ss.length); const needS = Math.min(2, s.length);
+  let pick = [...ss.slice(0,needSS), ...s.slice(0,needS)];
+  const remain = cap - pick.length; if(remain>0){ pick = pick.concat([...ss.slice(needSS), ...s.slice(needS)].slice(0,remain)); }
+  const homeCur = document.getElementById('home-curated'); homeCur.innerHTML=''; pick.forEach(a=> homeCur.appendChild(postCard(a)));
+}
+
+function renderBoard(filterText=''){
+  const list = state.A.list.slice().sort((a,b)=> (b.dateMs||0)-(a.dateMs||0));
+  const box = document.getElementById('boardList'); box.innerHTML='';
+  const q = filterText.trim(); let hit = 0;
+  list.forEach(a=>{ const hay = (a.title + '\n' + (a.home||'')); if(q && !hay.includes(q)) return; hit++; box.appendChild(postCard(a)); });
+  const info = document.getElementById('searchInfo'); info.textContent = q? `搜索 “${q}” 命中 ${hit} 条` : '';
+}
+
+function renderOfficial(){
+  const pinned = state.B.list.filter(x=>x.flags.p).sort((a,b)=> (b.dateMs||0)-(a.dateMs||0));
+  const others = state.B.list.filter(x=>!x.flags.p).sort((a,b)=> (b.dateMs||0)-(a.dateMs||0));
+  const top = document.getElementById('officialTop'); top.innerHTML=''; pinned.forEach(a=> top.appendChild(postCard(a)));
+  const list = document.getElementById('officialList'); list.innerHTML=''; others.forEach(a=> list.appendChild(postCard(a)));
+}
+
+/* 弹层（不变） */
+function openModal(a){
+  document.getElementById('mTitle').textContent = a.title;
+  const b = document.getElementById('mBadges'); b.innerHTML=''; badgeDots(a,b);
+  const meta = (a.mainTxt? a.mainTxt.split(/\n/)[0] : '') + (a.dateMs? ' · '+fmtDate(a.dateMs):'');
+  document.getElementById('mMeta').textContent = meta;
+  document.getElementById('mBody').textContent = a.home||'(无正文)';
+  const media = document.getElementById('mMedia'); media.innerHTML='';
+  (a.media.imgs||[]).forEach(src=> media.appendChild(el('img',{src})));
+  (a.media.vids||[]).forEach(src=>{ const v=el('video',{src,controls:'',playsinline:''}); v.style.maxHeight='360px'; media.appendChild(v); });
+  (a.media.auds||[]).forEach(src=> media.appendChild(el('audio',{src,controls:''})) );
+  document.getElementById('modal').classList.remove('hidden');
+}
+document.getElementById('mClose').addEventListener('click',()=> document.getElementById('modal').classList.add('hidden'));
+
+/* 初始化：读取 manifest_a.txt / manifest_b.txt（不变） */
+async function initFromManifests(){
+  const ma = await loadManifestTxt('manifest_a.txt');
+  const mb = await loadManifestTxt('manifest_b.txt');
+  if(ma){ const lines = ma.split(/\r?\n/).map(s=>s.trim()).filter(Boolean); const arr = []; for(const folder of lines){ arr.push(await loadArticleFromServer('a', folder)); } state.A.list = arr; state.A.byKey = Object.fromEntries(arr.map(x=>[x.key,x])); }
+  if(mb){ const lines = mb.split(/\r?\n/).map(s=>s.trim()).filter(Boolean); const arr = []; for(const folder of lines){ arr.push(await loadArticleFromServer('b', folder)); } state.B.list = arr; state.B.byKey = Object.fromEntries(arr.map(x=>[x.key,x])); }
+  renderHome(); renderBoard(); renderOfficial();
+}
+
+/* 搜索绑定（不变） */
+document.getElementById('btnSearch').addEventListener('click',()=>{ const q=document.getElementById('q').value; renderBoard(q); });
+document.getElementById('btnClear').addEventListener('click',()=>{ document.getElementById('q').value=''; renderBoard(''); });
+
+/* 邮箱彩蛋（保持） */
+(function(){
+  const main = document.getElementById('mailMain'); if(!main) return; let clicks=0; let timer=null;
+  function reset(){ clicks=0; if(timer){ clearTimeout(timer); timer=null; } }
+  main.addEventListener('click',()=>{
+    clicks++; if(timer) clearTimeout(timer); timer=setTimeout(reset,1200);
+    if(clicks>=5){ reset();
+      const t=document.createElement('div'); t.style=`position:fixed;right:16px;top:16px;z-index:99;background:#111;color:#fff;padding:10px 12px;border-radius:12px;box-shadow:0 8px 16px rgba(0,0,0,.2)`;
+      t.innerHTML='<b>GPT5 制作</b><br>感谢：Intel · Open AI · AURAX·MINI · Apple · Google · GPT5 · mini5pro ';
+      document.body.appendChild(t); setTimeout(()=>{ t.remove(); }, 3200);
+    }
+  });
+})();
+
+/* 启动 */
+switchTo();
+initFromManifests();
+</script>
+</body>
+</html>
